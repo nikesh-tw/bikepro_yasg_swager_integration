@@ -1,6 +1,5 @@
 migrations/
-__pycache__/
-requirements.txt    
+__pycache__/   
 apienv/
 # Distribution / packaging
 .Python
