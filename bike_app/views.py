@@ -15,6 +15,12 @@ from bike_app.serializers import BikeDetailSerializer,BikeDetailDataSerializer, 
 class BikeDetailView(APIView):
     serialzer_class = BikeDetailSerializer
 
+    def get(self,request,format=None):
+        try:
+            return Response("welcome")
+        except Exception as e:
+            return Response({'error':str(e)},status = status.HTTP_500_INTERNAL_SERVER_ERROR)
+
     def post(self, request):
         try:
             serializer = BikeDetailSerializer(data=request.data) #1
