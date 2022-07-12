@@ -13,7 +13,8 @@ https://docs.djangoproject.com/en/4.0/ref/settings/
 from pathlib import Path
 import os
 import django_heroku
-
+from datetime import timedelta
+from django.core.wsgi import get_wsgi_application
 
 BASE_DIR = Path(__file__).resolve().parent.parent
 
@@ -26,6 +27,7 @@ SECRET_KEY = 'django-insecure-t7wb9s34a*)5^46fmjmv+b696+_#$e%9c0pm)=ck)vcgxg=y_$
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = False
+
 
 ALLOWED_HOSTS = ['localhost','127.0.0.1','bikepro-deploy.heroku.com']
 
@@ -63,6 +65,7 @@ MIDDLEWARE = [
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 
 ]
+WHITENOISE_USE_FINDERS=True
 
 ROOT_URLCONF = 'bike_pro.urls'
 
@@ -143,10 +146,12 @@ STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
 STATIC_URL = '/static/'
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 MEDIA_URL = '/media/'
-STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
-STATICFILES_DIRS = [
-    os.path.join(BASE_DIR, "static"),
-]
+STATICFILES_STORAGE = 'whitenoise.django.GzipManifestStaticFilesStorage'
+
+os.environ.setdefault("DJANGO_SETTINGS_MODULE", "bike_pro.settings")
+
+application = get_wsgi_application()
+
 
 # Activate Django-Heroku.
 django_heroku.settings(locals())
