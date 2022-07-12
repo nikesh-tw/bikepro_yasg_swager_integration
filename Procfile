@@ -1,1 +1,1 @@
-web: gunicorn appname.wsgi:application --log-file - --log-level debug
+web: gunicorn bike_pro.wsgi --log-file -
