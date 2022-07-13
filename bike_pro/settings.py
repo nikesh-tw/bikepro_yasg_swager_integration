@@ -15,7 +15,7 @@ import os
 import django_heroku
 from datetime import timedelta
 from django.core.wsgi import get_wsgi_application
-from whitenoise.django import DjangoWhiteNoise
+#from whitenoise.django import DjangoWhiteNoise
 from django.conf.urls.static import static
 
 import dj_database_url #new
