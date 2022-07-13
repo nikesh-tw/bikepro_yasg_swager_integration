@@ -17,7 +17,6 @@ itypes
 Jinja2
 MarkupSafe
 openapi-codec
-packagin
 psycopg2
 pyparsing
 pytz
