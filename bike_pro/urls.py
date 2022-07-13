@@ -27,6 +27,8 @@ from rest_framework_swagger.views import get_swagger_view # <-- Here 1
 from rest_framework import permissions
 from drf_yasg.views import get_schema_view
 from drf_yasg import openapi
+from . import settings
+from django.conf.urls.static import static
 
 schema_view = get_schema_view(
     openapi.Info(
@@ -47,6 +49,11 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('bike/',include('bike_app.urls')),    
 ]
-
+# if settings.DEBUG: #if debug==true
+#     urlpatterns += static(settings.STATIC_URL,document_root = settings.STATICFILES_DIRS[0])
+#     urlpatterns += static(settings.STATIC_ROOT, document_root = settings.MEDIA_ROOT)
 #http://127.0.0.1:8000/bike/search-bike/ POST method input parameter- bike_number ="encoded"
 #output-bike detail by bike_number.
+if settings.DEBUG:
+    urlpatterns += static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
+    urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

@@ -15,6 +15,12 @@ import os
 import django_heroku
 from datetime import timedelta
 from django.core.wsgi import get_wsgi_application
+from whitenoise.django import DjangoWhiteNoise
+from django.conf.urls.static import static
+
+import dj_database_url #new
+from datetime import timedelta
+FILE_CHARSET=""
 
 BASE_DIR = Path(__file__).resolve().parent.parent
 
@@ -41,6 +47,7 @@ INSTALLED_APPS = [
     'django.contrib.contenttypes',
     'django.contrib.sessions',
     'django.contrib.messages',
+
     'django.contrib.staticfiles',
     'rest_framework',
     'rest_framework_swagger',
@@ -58,7 +65,6 @@ REST_FRAMEWORK = {
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
     'whitenoise.middleware.WhiteNoiseMiddleware',
-    "whitenoise.storage.CompressedManifestStaticFilesStorage",
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
@@ -67,6 +73,8 @@ MIDDLEWARE = [
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 
 ]
+
+
 WHITENOISE_USE_FINDERS=True
 
 ROOT_URLCONF = 'bike_pro.urls'
@@ -132,6 +140,9 @@ USE_I18N = True
 USE_TZ = True
 
 
+db_from_env = dj_database_url.config(conn_max_age=500)
+DATABASES['default'].update(db_from_env)
+
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/4.0/howto/static-files/
 
@@ -148,14 +159,10 @@ STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
 STATIC_URL = '/static/'
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 MEDIA_URL = '/media/'
-STATICFILES_STORAGE = 'whitenoise.django.GzipManifestStaticFilesStorage'
+STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
 
 os.environ.setdefault("DJANGO_SETTINGS_MODULE", "bike_pro.settings")
 
 application = get_wsgi_application()
-
-from whitenoise.django import DjangoWhiteNoise
-
-application = DjangoWhiteNoise(get_wsgi_application())
-# Activate Django-Heroku.
+#application = DjangoWhiteNoise(application)
 django_heroku.settings(locals())
