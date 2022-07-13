@@ -12,6 +12,8 @@ from rest_framework import status
 
 from bike_app.serializers import BikeDetailSerializer,BikeDetailDataSerializer, decode_bike_number
 
+def index(self,request):
+    return Response("welcome to index page")
 class BikeDetailView(APIView):
     serialzer_class = BikeDetailSerializer
 

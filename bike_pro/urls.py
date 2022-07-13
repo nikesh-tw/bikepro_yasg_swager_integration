@@ -47,7 +47,7 @@ urlpatterns = [
         name='schema-swagger-ui'),  #<-- Here
     
     path('admin/', admin.site.urls),
-    path('bike/',include('bike_app.urls')),    
+    path('',include('bike_app.urls')),    
 ]
 # if settings.DEBUG: #if debug==true
 #     urlpatterns += static(settings.STATIC_URL,document_root = settings.STATICFILES_DIRS[0])
