@@ -1,1 +1,1 @@
-web: gunicorn bike_pro.wsgi --log-file -
+web: gunicorn bike_pro.wsgi:application --log-file=-
