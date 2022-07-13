@@ -140,7 +140,7 @@ USE_I18N = True
 USE_TZ = True
 
 
-db_from_env = dj_database_url.config(conn_max_age=500)
+db_from_env = dj_database_url.config(conn_max_age=500,ssl_require=True)
 DATABASES['default'].update(db_from_env)
 
 # Static files (CSS, JavaScript, Images)
