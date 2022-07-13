@@ -7,7 +7,8 @@ from . import views
 
 
 urlpatterns = [
-    path('search-bike/',BikeDetailView.as_view(), name="bike-detail"),
-    path('',views.index,name="index"),
+    #path('search-bike/',BikeDetailView.as_view(), name="bike-detail"),
+    #path('',views.index,name="index"),
+    path('',BikeDetailView.as_view(), name="bike-detail"),
 ]
 #path('',SwaggerSchemaView.as_view(),name="swagger"),
